@@ -1,10 +1,11 @@
-import express from 'express';
+import express, { json } from 'express';
+
+import routes from './routes';
 
 const app = express();
 
-app.get('/', (req, res) => {
-  return res.json({ message: 'Hello World' });
-});
+app.use(json());
+app.use(routes);
 
 const port = process.env.PORT || 3333;
 
