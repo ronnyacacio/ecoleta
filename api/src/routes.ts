@@ -7,8 +7,8 @@ const routes = Router();
 
 routes.get('/items', ItemController.index);
 
-routes.get('/points/:id', PointController.show);
 routes.get('/points', PointController.index);
+routes.get('/points/:id', PointController.show);
 routes.post('/points', PointController.store);
 
 export default routes;
