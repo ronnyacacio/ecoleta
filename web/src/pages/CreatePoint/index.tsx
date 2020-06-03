@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Map, TileLayer, Marker } from 'react-leaflet';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import logo from '../../assets/logo.svg';
@@ -15,12 +16,15 @@ const CreatePoint: React.FC = () => {
           Voltar para home
           </Link>
       </header>
+
       <form>
         <h1>Cadastro do <br /> ponto de coleta</h1>
+
         <fieldset>
           <legend>
             <h2>Dados</h2>
           </legend>
+
           <div className="field">
             <label htmlFor="name">Nome da entidade</label>
             <input
@@ -29,6 +33,7 @@ const CreatePoint: React.FC = () => {
               id="name"
             />
           </div>
+
           <div className="field-group">
             <div className="field">
               <label htmlFor="email">E-mail</label>
@@ -38,6 +43,7 @@ const CreatePoint: React.FC = () => {
                 id="email"
               />
             </div>
+
             <div className="field">
               <label htmlFor="whatsapp">WhatsApp</label>
               <input
@@ -48,11 +54,21 @@ const CreatePoint: React.FC = () => {
             </div>
           </div>
         </fieldset>
+
         <fieldset>
           <legend>
             <h2>Endereço</h2>
             <span>Selecione o endereço no mapa</span>
           </legend>
+
+          <Map center={[-3.793339, -39.272537]} zoom={15}>
+            <TileLayer
+              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={[-3.793339, -39.272537]} />
+          </Map>
+
           <div className="field-group">
             <div className="field">
               <label htmlFor="uf">Estado (UF)</label>
@@ -60,6 +76,7 @@ const CreatePoint: React.FC = () => {
                 <option value="0">Selecione uma UF</option>
               </select>
             </div>
+
             <div className="field">
               <label htmlFor="city">Cidade</label>
               <select name="city" id="city">
@@ -68,11 +85,13 @@ const CreatePoint: React.FC = () => {
             </div>
           </div>
         </fieldset>
+
         <fieldset>
           <legend>
             <h2>Ítems de coleta</h2>
             <span>Selecione um ou mais ítems abaixo</span>
           </legend>
+
           <ul className="items-grid">
             <li>
               <img src="http://localhost:3333/uploads/oleo.svg" alt="Item" />
@@ -100,6 +119,7 @@ const CreatePoint: React.FC = () => {
             </li>
           </ul>
         </fieldset>
+
         <button type="submit">Cadastrar ponto de coleta</button>
       </form>
     </div>
