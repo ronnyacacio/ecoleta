@@ -1,7 +1,10 @@
 #page-home {
   height: 100vh;
 
-  background: url('../../assets/home-background.svg') no-repeat 600px bottom;
+  background: url('../../assets/home-background.svg') no-repeat;
+  background-position-x: 550px;
+  background-position-y: 170px;
+  background-size: 800px;
 }
 
 #page-home .content {
@@ -68,7 +71,7 @@
 }
 
 #page-home .content main a span svg {
-  color: #FFF;
+  color: #fff;
   width: 20px;
   height: 20px;
 }
@@ -76,14 +79,14 @@
 #page-home .content main a strong {
   flex: 1;
   text-align: center;
-  color: #FFF;
+  color: #fff;
 }
 
 #page-home .content main a:hover {
-  background: #2FB86E;
+  background: #2fb86e;
 }
 
-@media(max-width: 900px) {
+@media (max-width: 900px) {
   #page-home .content {
     align-items: center;
     text-align: center;
