@@ -1,5 +1,5 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
 import { FiArrowLeft } from 'react-icons/fi';
@@ -23,16 +23,33 @@ interface IBGECityResponse {
   nome: string;
 }
 
+interface InputData {
+  name: string;
+  email: string;
+  whatsapp: string;
+}
+
 const CreatePoint: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [ufs, setUfs] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);
+
+  const [inputData, setInputData] = useState<InputData>({
+    name: '',
+    email: '',
+    whatsapp: '',
+  });
 
   const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
 
   const [selectedUf, setSelectedUf] = useState('0');
   const [selectedCity, setSelectedCity] = useState('0');
   const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+
+  const [marker, setMarker] = useState(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -91,6 +108,51 @@ const CreatePoint: React.FC = () => {
     const { lat, lng } = event.latlng;
 
     setSelectedPosition([lat, lng]);
+
+    !marker && setMarker(prevValue => !prevValue);
+  }
+
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
+
+    setInputData({ ...inputData, [name]: value });
+  }
+
+  function handleSelectItem(id: number) {
+    const alreadyItems = selectedItems.findIndex(item => item === id);
+
+    if (alreadyItems >= 0) {
+      const filteredItems = selectedItems.filter(item => item !== id);
+      setSelectedItems(filteredItems);
+    } else
+      setSelectedItems([...selectedItems, id]);
+  }
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+
+    const { name, email, whatsapp } = inputData;
+    const uf = selectedUf;
+    const city = selectedCity;
+    const [latitude, longitude] = marker ? selectedPosition : initialPosition;
+    const items = selectedItems;
+
+    const data = {
+      name,
+      email,
+      whatsapp,
+      uf,
+      city,
+      latitude,
+      longitude,
+      items,
+    };
+
+    await api.post('points', data);
+
+    alert('Ponto cadastrado com sucesso!');
+
+    history.push('/');
   }
 
   return (
@@ -103,7 +165,7 @@ const CreatePoint: React.FC = () => {
           </Link>
       </header>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <h1>Cadastro do <br /> ponto de coleta</h1>
 
         <fieldset>
@@ -117,6 +179,7 @@ const CreatePoint: React.FC = () => {
               type="text"
               name="name"
               id="name"
+              onChange={handleInputChange}
             />
           </div>
 
@@ -127,6 +190,7 @@ const CreatePoint: React.FC = () => {
                 type="email"
                 name="email"
                 id="email"
+                onChange={handleInputChange}
               />
             </div>
 
@@ -136,6 +200,7 @@ const CreatePoint: React.FC = () => {
                 type="text"
                 name="whatsapp"
                 id="whatsapp"
+                onChange={handleInputChange}
               />
             </div>
           </div>
@@ -196,7 +261,11 @@ const CreatePoint: React.FC = () => {
 
           <ul className="items-grid">
             {items.map(item => (
-              <li key={item.id}>
+              <li
+                key={item.id}
+                className={selectedItems.includes(item.id) ? 'selected' : ''}
+                onClick={() => handleSelectItem(item.id)}
+              >
                 <img src={item.image_url} alt={item.title} />
                 <span>{item.title}</span>
               </li>
