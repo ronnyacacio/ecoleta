@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, ImageBackground, View, Text, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import { Feather as Icon } from '@expo/vector-icons';
+import { StyleSheet, ImageBackground, View, Text, Image } from 'react-native';
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
