@@ -48,7 +48,7 @@ const CreatePoint: React.FC = () => {
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
   const [marker, setMarker] = useState(false);
-  const [pointCreated, setPoinCreated] = useState(false);
+  const [pointCreated, setPointCreated] = useState(false);
 
   const history = useHistory();
 
@@ -151,7 +151,7 @@ const CreatePoint: React.FC = () => {
 
     await api.post('points', data);
 
-    setPoinCreated(true);
+    setPointCreated(true);
 
     setTimeout(() => {
       history.push('/');
