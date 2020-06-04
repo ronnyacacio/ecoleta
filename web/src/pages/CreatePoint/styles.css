@@ -201,3 +201,26 @@
   background: #e1faec;
   border: 2px solid #34cb79;
 }
+
+#success-message {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+
+  background-color: #0e0a14;
+  opacity: 0.95;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#success-message h2 {
+  margin-top: 0.5em;
+  font-size: 2em;
+  color: #fff;
+}

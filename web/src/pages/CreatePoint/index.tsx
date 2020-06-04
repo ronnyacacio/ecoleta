@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
-import { FiArrowLeft } from 'react-icons/fi';
+import { FiArrowLeft, FiCheckCircle } from 'react-icons/fi';
 
 import api from '../../services/api';
 import ibge from '../../services/ibge';
@@ -48,6 +48,7 @@ const CreatePoint: React.FC = () => {
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
   const [marker, setMarker] = useState(false);
+  const [pointCreated, setPoinCreated] = useState(false);
 
   const history = useHistory();
 
@@ -150,9 +151,11 @@ const CreatePoint: React.FC = () => {
 
     await api.post('points', data);
 
-    alert('Ponto cadastrado com sucesso!');
+    setPoinCreated(true);
 
-    history.push('/');
+    setTimeout(() => {
+      history.push('/');
+    }, 2000);
   }
 
   return (
@@ -162,7 +165,7 @@ const CreatePoint: React.FC = () => {
         <Link to="/">
           <FiArrowLeft />
           Voltar para home
-          </Link>
+        </Link>
       </header>
 
       <form onSubmit={handleSubmit}>
@@ -275,6 +278,12 @@ const CreatePoint: React.FC = () => {
 
         <button type="submit">Cadastrar ponto de coleta</button>
       </form>
+      {pointCreated && (
+        <div id="success-message">
+          <FiCheckCircle color="#34CB79" size={32} />
+          <h2>Cadastro concluído!</h2>
+        </div>
+      )}
     </div>
   );
 };
