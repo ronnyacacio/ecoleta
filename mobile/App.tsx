@@ -1,19 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'react-native';
+import { AppLoading } from 'expo';
+import { useFonts, Ubuntu_700Bold } from '@expo-google-fonts/ubuntu';
+import { Roboto_400Regular, Roboto_500Medium } from '@expo-google-fonts/roboto';
+
+import Home from './src/pages/Home';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Ubuntu_700Bold,
+    Roboto_400Regular,
+    Roboto_500Medium,
+  });
+
+  if (!fontsLoaded) return <AppLoading />
+
   return (
-    <View style={styles.container}>
-      <Text>Hello World</Text>
-    </View>
+    <>
+      <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
+      <Home />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
