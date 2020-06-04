@@ -4,7 +4,7 @@ import { AppLoading } from 'expo';
 import { useFonts, Ubuntu_700Bold } from '@expo-google-fonts/ubuntu';
 import { Roboto_400Regular, Roboto_500Medium } from '@expo-google-fonts/roboto';
 
-import Home from './src/pages/Home';
+import Routes from './src/routes';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -18,7 +18,7 @@ export default function App() {
   return (
     <>
       <StatusBar backgroundColor="transparent" barStyle="dark-content" translucent />
-      <Home />
+      <Routes />
     </>
   );
 }
