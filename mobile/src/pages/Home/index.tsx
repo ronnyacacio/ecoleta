@@ -1,14 +1,75 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
+import RNPickerSelect from 'react-native-picker-select';
 import { Feather as Icon } from '@expo/vector-icons';
-import { StyleSheet, ImageBackground, View, Text, Image } from 'react-native';
+import { StyleSheet, ImageBackground, View, Text, Image, Alert } from 'react-native';
+
+import ibge from '../../services/ibge';
+
+interface IBGEUFResponse {
+  sigla: string;
+}
+
+interface IBGECityResponse {
+  nome: string;
+}
+
+interface FormatPickerSelect {
+  label: string;
+  value: string;
+}
 
 const Home: React.FC = () => {
+  const [ufs, setUfs] = useState<FormatPickerSelect[]>([]);
+  const [cities, setCities] = useState<FormatPickerSelect[]>([]);
+
+  // const [chooseUf, setChooseUf] = useState(false);
+
+  const [selectedUf, setSelectedUf] = useState('0');
+  const [selectedCity, setSelectedCity] = useState('0');
+
   const navigation = useNavigation();
 
+  useEffect(() => {
+    async function loadUfs() {
+      const response = await ibge.get<IBGEUFResponse[]>('localidades/estados');
+
+      const ufInitials = response.data.map(uf => {
+        return {
+          label: uf.sigla,
+          value: uf.sigla,
+        };
+      });
+
+      setUfs(ufInitials);
+    }
+    loadUfs();
+  }, []);
+
+  useEffect(() => {
+    async function loadCities() {
+      if (selectedUf === '0') return;
+
+      const response = await ibge.get<IBGECityResponse[]>(`localidades/estados/${selectedUf}/municipios`);
+
+      const cityNames = response.data.map(city => {
+        return {
+          label: city.nome,
+          value: city.nome,
+        };
+      });
+
+      setCities(cityNames);
+    }
+    loadCities();
+  }, [selectedUf]);
+
   function handleNavigateToPoints() {
-    navigation.navigate('Points')
+    if (selectedUf === '0' || selectedCity === '0')
+      Alert.alert('Ooops...', 'Precisamos que selecione a uf e a cidade.');
+    else
+      navigation.navigate('Points', { uf: selectedUf, city: selectedCity });
   }
 
   return (
@@ -25,6 +86,25 @@ const Home: React.FC = () => {
         </Text>
       </View>
       <View style={styles.footer}>
+        {ufs.length > 0 && (
+          <RNPickerSelect
+            style={{ ...pickerSelectStyles }}
+            onValueChange={(value) => {
+              setSelectedUf(String(value));
+              setSelectedCity('0');
+            }}
+            items={ufs}
+          />
+        )}
+
+        {selectedUf !== '0' && (
+          <RNPickerSelect
+            style={{ ...pickerSelectStyles }}
+            onValueChange={(value) => setSelectedCity(String(value))}
+            items={cities}
+          />
+        )}
+
         <RectButton onPress={handleNavigateToPoints} style={styles.button}>
           <View style={styles.buttonIcon}>
             <Text>
@@ -39,6 +119,26 @@ const Home: React.FC = () => {
     </ImageBackground>
   );
 };
+
+const pickerSelectStyles = StyleSheet.create({
+  viewContainer: {
+    height: 60,
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginBottom: 8,
+    paddingHorizontal: 24,
+    fontSize: 16,
+  },
+
+  inputAndroid: {
+    color: '#322153'
+  },
+
+  inputIOS: {
+    color: '#322153'
+  }
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -70,7 +170,10 @@ const styles = StyleSheet.create({
 
   footer: {},
 
-  select: {},
+  select: {
+    backgroundColor: 'red',
+    marginBottom: 30,
+  },
 
   input: {
     height: 60,
