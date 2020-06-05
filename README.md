@@ -62,7 +62,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
   <img alt="Ecoleta" title="#delicinha" src=".github/api.png" />
 </h1>
 
-## 🌐 Frontend
+## 🌐 WEB
 
 <h1 align="center">
     GIF FRONTEND
