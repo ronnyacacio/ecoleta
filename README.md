@@ -102,5 +102,5 @@ $ expo start
 ```
 
 <p align="center">
-  Feito com 💗 by <a href="https://www.linkedin.com/in/ronnyacacio/"> Ronny Acácio </a>
+  Feito com ❤ by <a href="https://www.linkedin.com/in/ronnyacacio/"> Ronny Acácio </a>
 </p>
