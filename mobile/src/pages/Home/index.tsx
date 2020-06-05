@@ -24,8 +24,6 @@ const Home: React.FC = () => {
   const [ufs, setUfs] = useState<FormatPickerSelect[]>([]);
   const [cities, setCities] = useState<FormatPickerSelect[]>([]);
 
-  // const [chooseUf, setChooseUf] = useState(false);
-
   const [selectedUf, setSelectedUf] = useState('0');
   const [selectedCity, setSelectedCity] = useState('0');
 
