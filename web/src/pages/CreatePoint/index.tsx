@@ -2,6 +2,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
+import * as Yup from 'yup';
 import { FiArrowLeft, FiCheckCircle } from 'react-icons/fi';
 
 import api from '../../services/api';
@@ -9,6 +10,17 @@ import ibge from '../../services/ibge';
 import Dropzone from '../../components/Dropzone';
 import logo from '../../assets/logo.svg';
 import './styles.css';
+
+const schema = Yup.object().shape({
+  name: Yup.string().required(),
+  email: Yup.string().email().required(),
+  whatsapp: Yup.string().required(),
+  latitude: Yup.number().required(),
+  longitude: Yup.number().required(),
+  city: Yup.string().required(),
+  uf: Yup.string().max(2).min(2).required(),
+  items: Yup.string().required(),
+});
 
 interface Item {
   id: number;
@@ -138,7 +150,28 @@ const CreatePoint: React.FC = () => {
     const uf = selectedUf;
     const city = selectedCity;
     const [latitude, longitude] = marker ? selectedPosition : initialPosition;
-    const items = selectedItems;
+    const items = selectedItems.join(',');
+
+    const validate = {
+      name,
+      email,
+      whatsapp,
+      latitude,
+      longitude,
+      city,
+      uf,
+      items,
+    };
+
+    if (!(await schema.isValid(validate))) {
+      alert('Todos os campos são necessários!');
+      return;
+    }
+
+    if (!selectedFile) {
+      alert('Selecione uma imagem do seu estabelecimento!');
+      return;
+    }
 
     const data = new FormData();
 
@@ -149,9 +182,8 @@ const CreatePoint: React.FC = () => {
     data.append('city', city);
     data.append('longitude', String(longitude));
     data.append('latitude', String(latitude));
-    data.append('items', items.join(','));
-
-    if (selectedFile) data.append('image', selectedFile);
+    data.append('items', items);
+    data.append('image', selectedFile);
 
     await api.post('points', data);
 

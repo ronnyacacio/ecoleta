@@ -1,6 +1,7 @@
 import express, { json } from 'express';
 import cors from 'cors';
 import { resolve } from 'path';
+import { errors } from 'celebrate';
 
 import routes from './routes';
 
@@ -10,6 +11,7 @@ app.use(cors());
 app.use(json());
 app.use(routes);
 app.use('/uploads', express.static(resolve(__dirname, '..', 'uploads')));
+app.use(errors());
 
 const port = process.env.PORT || 3333;
 
