@@ -86,6 +86,10 @@ const Home: React.FC = () => {
       <View style={styles.footer}>
         {ufs.length > 0 && (
           <RNPickerSelect
+            placeholder={{
+              label: 'Selecione uma UF',
+              value: '0',
+            }}
             style={{ ...pickerSelectStyles }}
             onValueChange={(value) => {
               setSelectedUf(String(value));
@@ -97,6 +101,10 @@ const Home: React.FC = () => {
 
         {selectedUf !== '0' && (
           <RNPickerSelect
+            placeholder={{
+              label: 'Selecione uma cidade',
+              value: '0',
+            }}
             style={{ ...pickerSelectStyles }}
             onValueChange={(value) => setSelectedCity(String(value))}
             items={cities}
