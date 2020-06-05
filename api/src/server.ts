@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import express, { json } from 'express';
 import cors from 'cors';
 import { resolve } from 'path';
@@ -13,7 +15,7 @@ app.use(routes);
 app.use('/uploads', express.static(resolve(__dirname, '..', 'uploads')));
 app.use(errors());
 
-const port = process.env.PORT || 3333;
+const port = process.env.PORT;
 
 app.listen(port, () => {
   console.log(`🔥 Server started at http://localhost:${port}`);
