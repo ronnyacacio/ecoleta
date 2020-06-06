@@ -49,7 +49,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Expo](https://expo.io/)
 - [Knex](http://knexjs.org/)
 - [API do IBGE para consumo do endereço](https://servicodados.ibge.gov.br/api/docs/localidades?versao=1#api-UFs-estadosGet)
-- [Upload de imagens](react-dropzone)
+- [React-Dropzone para upload de imagens](react-dropzone)
 - [Leaflet](https://leafletjs.com/examples/quick-start/)
 - [Yup](https://github.com/jquense/yup)
 - [Celebrate](https://github.com/arb/celebrate)
