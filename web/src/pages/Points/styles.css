@@ -1,0 +1,73 @@
+#page-search-points {
+  width: 100%;
+  margin: auto;
+}
+
+#page-search-points header {
+  margin: auto;
+  max-width: 1100px;
+  padding-bottom: 150px;
+}
+
+#page-search-points header #header {
+  margin-top: 48px;
+  max-width: 1100px;
+
+  margin-bottom: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#page-search-points header a {
+  color: var(--title-color);
+  font-weight: bold;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+}
+
+#page-search-points header a svg {
+  margin-right: 16px;
+  color: var(--primary-color);
+}
+
+#search-background {
+  background-color: #fff;
+  width: 100%;
+}
+
+#search-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: auto;
+  position: relative;
+  top: -100px;
+  max-width: 1100px;
+}
+
+#search-content #point {
+  display: grid;
+  margin-bottom: 50px;
+}
+
+#search-content #point img {
+  width: 349px;
+  height: 250px;
+  border-radius: 8px;
+}
+
+#search-content #point strong {
+  margin: 15px 0;
+  color: var(--primary-color);
+  font-size: 24px;
+}
+
+#search-content #point h1 {
+  margin: 15px 0;
+}
+
+#search-content #point span {
+  line-height: 25px;
+}

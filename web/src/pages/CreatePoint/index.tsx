@@ -96,7 +96,10 @@ const CreatePoint: React.FC = () => {
 
   useEffect(() => {
     async function loadCities() {
-      if (selectedUf === '0') return;
+      if (selectedUf === '0') {
+        setCities([]);
+        return;
+      }
 
       const response = await ibge.get<IBGECityResponse[]>(`localidades/estados/${selectedUf}/municipios`);
 
