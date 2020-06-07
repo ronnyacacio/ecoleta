@@ -39,23 +39,6 @@ O <strong>Ecoleta</strong> serve como um Marketplace, uma conexão entre empresa
 
 <br />
 
-## 🚀 Tecnologias
-
-Esse projeto foi desenvolvido com as seguintes tecnologias:
-
-- [Node.js](https://nodejs.org/en/)
-- [React](https://reactjs.org)
-- [React Native](https://facebook.github.io/react-native/)
-- [Expo](https://expo.io/)
-- [Knex](http://knexjs.org/)
-- [API do IBGE para consumo do endereço](https://servicodados.ibge.gov.br/api/docs/localidades?versao=1#api-UFs-estadosGet)
-- [React-Dropzone para upload de imagens](react-dropzone)
-- [Leaflet](https://leafletjs.com/examples/quick-start/)
-- [Yup](https://github.com/jquense/yup)
-- [Celebrate](https://github.com/arb/celebrate)
-
-<br />
-
 ## 🔨 API
 
 <h1 align="center">
@@ -73,6 +56,25 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 <h1 align="center">
     GIF MOBILE
 </h1>
+
+<br />
+
+## 🚀 Tecnologias
+
+Esse projeto foi desenvolvido com as seguintes tecnologias:
+
+- [Node.js](https://nodejs.org/en/)
+- [React](https://reactjs.org)
+- [React Native](https://facebook.github.io/react-native/)
+- [Expo](https://expo.io/)
+- [Knex](http://knexjs.org/)
+- [API do IBGE para consumo do endereço](https://servicodados.ibge.gov.br/api/docs/localidades?versao=1#api-UFs-estadosGet)
+- [React-Dropzone para upload de imagens](react-dropzone)
+- [Leaflet](https://leafletjs.com/examples/quick-start/)
+- [Yup](https://github.com/jquense/yup)
+- [Celebrate](https://github.com/arb/celebrate)
+
+<br />
 
 ## 🔖 Layout
 
