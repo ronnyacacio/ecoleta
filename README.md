@@ -54,7 +54,7 @@ O <strong>Ecoleta</strong> serve como um Marketplace, uma conexão entre empresa
 ## 📱 Mobile
 
 <h1 align="center">
-    GIF MOBILE
+    <img src=".github/ecoleta-mobile.gif" />
 </h1>
 
 <br />
