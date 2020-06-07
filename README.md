@@ -65,7 +65,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 ## 🌐 WEB
 
 <h1 align="center">
-    GIF FRONTEND
+    <img src=".github/ecoleta-web.gif" />
 </h1>
 
 ## 📱 Mobile
