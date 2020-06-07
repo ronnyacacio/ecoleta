@@ -9,7 +9,7 @@ import './styles.css';
 interface Point {
   id: number;
   name: string;
-  image: string;
+  image_url: string;
   uf: string;
   city: string;
 }
@@ -64,7 +64,7 @@ const Points: React.FC<Props> = ({ location }) => {
         <div id="search-content">
           {data.map(({ point, items }) => (
             <div key={point.id} id="point">
-              <img src={point.image} alt={point.name} />
+              <img src={point.image_url} alt={point.name} />
               <h1>{point.name}</h1>
               <strong>{items.map(item => (
                 `${item.title}, `
