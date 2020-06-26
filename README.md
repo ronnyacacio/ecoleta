@@ -87,6 +87,7 @@ Acesse o layout pelo [Figma](https://www.figma.com/file/1SxgOMojOB2zYT0Mdk28lB/)
 $ git clone https://github.com/ronnyacacio/ecoleta.git
 
 # Navegue até a pasta api e execute os seguintes comandos:
+$ yarn
 $ npx knex migrate:latest
 $ npx knex seed:run
 $ yarn dev
